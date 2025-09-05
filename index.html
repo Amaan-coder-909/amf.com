@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A&M Fashion - Define Your Style</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #F5F5DC;
+            /* Primary Beige */
+            color: #2C222C;
+            /* Secondary Dark Gray */
+            line-height: 1.6;
+        }
+
+        /* Color Palette Variables */
+        :root {
+            --primary-dark-green: #0B331A;
+            --primary-beige: #F5F5DC;
+            --secondary-white: #FFFFFF;
+            --secondary-dark-gray: #2C222C;
+            --accent-gold: #C9A96E;
+            --accent-brown: #8D7F70;
+            --neutral-light-green: #DCE5D2;
+            --neutral-light-beige: #E6DDC4;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--primary-dark-green);
+            color: var(--secondary-white);
+            padding: 20px;
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .logo {
+            font-size: 2.5em;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .tagline {
+            font-size: 1.2em;
+            margin-top: 10px;
+            color: var(--accent-gold);
+        }
+
+        /* Hero Section */
+        .hero {
+            background-color: var(--neutral-light-beige);
+            padding: 60px 20px;
+            text-align: center;
+            animation: slideInUp 1s ease-in-out;
+        }
+
+        .hero h1 {
+            font-size: 3em;
+            color: var(--primary-dark-green);
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.5em;
+            color: var(--accent-brown);
+            margin-bottom: 30px;
+        }
+
+        .cta-button {
+            background-color: var(--accent-gold);
+            color: var(--secondary-white);
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: var(--accent-brown);
+            transform: scale(1.05);
+        }
+
+        /* Product Section */
+        .products {
+            padding: 40px 20px;
+            background-color: var(--secondary-white);
+            text-align: center;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .products h2 {
+            font-size: 2.5em;
+            color: var(--primary-dark-green);
+            margin-bottom: 40px;
+        }
+
+        .carousel {
+            max-width: 1200px;
+            margin: 0 auto 40px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .carousel-inner {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel-item {
+            min-width: 100%;
+            text-align: center;
+            padding: 20px;
+            background-color: var(--neutral-light-green);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            animation: zoomIn 0.8s ease-in-out;
+        }
+
+        .carousel-item img {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .carousel-item h3 {
+            margin: 15px 0 10px;
+            color: var(--accent-gold);
+        }
+
+        .carousel-item p {
+            color: var(--secondary-dark-gray);
+        }
+
+        .carousel-prev,
+        .carousel-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: var(--accent-gold);
+            color: var(--secondary-white);
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .carousel-prev {
+            left: 10px;
+        }
+
+        .carousel-next {
+            right: 10px;
+        }
+
+        .carousel-prev:hover,
+        .carousel-next:hover {
+            background-color: var(--accent-brown);
+        }
+
+        .sallu {
+            position: fixed;
+            bottom: 35px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: bold;
+            color: white;
+            background-color: #C9A96E;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            text-decoration: none;
+            animation: bounce 1.5s ease infinite;
+            transition: background-color 0.3s;
+        }
+
+        .sallu:hover {
+            background-color: #8D7F70;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateX(-50%) translateY(0);
+            }
+
+            50% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-dark-green);
+            color: var(--secondary-white);
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9em;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.9);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2em;
+            }
+
+            .hero p {
+                font-size: 1.2em;
+            }
+
+            .products h2 {
+                font-size: 2em;
+            }
+
+            .carousel-item {
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 15px;
+            }
+
+            .logo {
+                font-size: 2em;
+            }
+
+            .tagline {
+                font-size: 1em;
+            }
+
+            .cta-button {
+                padding: 10px 20px;
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">A&M FASHION</div>
+        <div class="tagline">DEFINE YOUR STYLE</div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Welcome to A&M Fashion</h1>
+        <p>Discover luxury clothing that defines your unique style with elegance and balance.</p>
+        <button class="cta-button">Shop Now</button>
+    </section>
+
+    <!-- Product Section with Two Carousels -->
+    <section class="products">
+        <h2>Our Collections</h2>
+
+
+        <!-- Carousel 1: Tees Collection -->
+        <div class="carousel" id="carousel2">
+            <div class="carousel-inner" id="carouselInner2">
+                <div class="carousel-item">
+                    <img src="https://thebargainstreet.com/cdn/shop/files/Copy-of-Copy-of-_E3_83_A2_E3_83_B3_E3_82_AD_E3_83_BC_E3_83_BBD_E3_83_BB_E3_83_AB_E3_83_95_E3_82_A3-48.png?v=1708109606"
+                        alt="Itachi Tshirt">
+                    <h3>Itachi Tshirt</h3>
+                    <p>Elegant design.</p>
+                </div>
+                <div class="carousel-item">
+                    <img src="https://turnedninja.com/cdn/shop/products/1_ece2e45c-b72e-4f71-ae8b-1d53060f5524_1200x1200.jpg?v=1753418398"
+                        alt="Special Tshirt">
+                    <h3>Premium Tshirt</h3>
+                    <p>Jiraiya fans love it.</p>
+                </div>
+                <div class="carousel-item">
+                    <img src="https://pronk.in/cdn/shop/files/434.jpg?v=1717588244" alt="DBZ tees">
+                    <h3>Stylish Tshirt</h3>
+                    <p>OverRated Tshirt.</p>
+                </div>
+                <div class="carousel-item">
+                    <img src="https://strongsoul.in/cdn/shop/files/0f3073c5506eb9efcd0a5991c2df5f25-transformed_1946x.jpg"
+                        alt="POWERFUL Tshirt">
+                    <h3>GOKU Tshirt</h3>
+                    <p><b>POWERFUL</b> Tshirt.</p>
+                </div>
+            </div>
+            <button class="carousel-prev" onclick="prevSlide(2)">&#10094;</button>
+            <button class="carousel-next" onclick="nextSlide(2)">&#10095;</button>
+        </div>
+        <!-- Carousel 2: Top pick Collection -->
+        <div class="carousel" id="carousel1">
+            <div class="carousel-inner" id="carouselInner1">
+                <div class="carousel-item">
+                    <img src="https://m.media-amazon.com/images/I/81a3208h+bL._UY1100_.jpg" alt="Men's Shirt">
+                    <h3>Elegant Shirt</h3>
+                    <p>Luxury fabric in dark green.</p>
+                </div>
+                <div class="carousel-item">
+                    <img src="https://media.powerlook.in/catalog/product/f/r/front_angle_myntra_and_website.jpg?aio=w-640"
+                        alt="Men's Pants">
+                    <h3>Stylish Pants</h3>
+                    <p>Comfortable and sophisticated.</p>
+                </div>
+                <div class="carousel-item">
+                    <img src="https://wrogn.com/cdn/shop/files/Picasso-Gone-Wrogn-Back-Printed-T-Shirt.webp?v=1744697737"
+                        alt="Men's Jacket">
+                    <h3>Premium T-shirt</h3>
+                    <p>With Premium Printing.</p>
+                </div>
+            </div>
+            <button class="carousel-prev" onclick="prevSlide(1)">&#10094;</button>
+            <button class="carousel-next" onclick="nextSlide(1)">&#10095;</button>
+        </div>
+    </section>
+
+
+    <a href="sallu.html"><button class="sallu">Click Me in the end!</button></a>
+
+    <!-- Footer -->
+    <footer>
+        &copy; 2025 A&M Fashion. All rights reserved.
+    </footer>
+
+    <!-- JavaScript for Carousels -->
+    <script>
+        let currentSlide1 = 0;
+        let currentSlide2 = 0;
+        let autoSlideInterval1 = null;
+        let autoSlideInterval2 = null;
+        const AUTO_SLIDE_INTERVAL = 3000; // 3 seconds
+        const PAUSE_DURATION = 5000; // 5 seconds pause after manual interaction
+
+        function showSlide(carouselId, index) {
+            const inner = document.getElementById(`carouselInner${carouselId}`);
+            const items = inner.children;
+            if (index >= items.length) index = 0;
+            if (index < 0) index = items.length - 1;
+            inner.style.transform = `translateX(-${index * 100}%)`;
+            return index;
+        }
+
+        function nextSlide(carouselId) {
+            if (carouselId === 1) {
+                currentSlide1 = showSlide(1, currentSlide1 + 1);
+                pauseAndResumeAutoSlide(1);
+            } else {
+                currentSlide2 = showSlide(2, currentSlide2 + 1);
+                pauseAndResumeAutoSlide(2);
+            }
+        }
+
+        function prevSlide(carouselId) {
+            if (carouselId === 1) {
+                currentSlide1 = showSlide(1, currentSlide1 - 1);
+                pauseAndResumeAutoSlide(1);
+            } else {
+                currentSlide2 = showSlide(2, currentSlide2 - 1);
+                pauseAndResumeAutoSlide(2);
+            }
+        }
+
+        function startAutoSlide(carouselId) {
+            if (carouselId === 1) {
+                if (!autoSlideInterval1) {
+                    autoSlideInterval1 = setInterval(() => nextSlide(1), AUTO_SLIDE_INTERVAL);
+                }
+            } else {
+                if (!autoSlideInterval2) {
+                    autoSlideInterval2 = setInterval(() => nextSlide(2), AUTO_SLIDE_INTERVAL);
+                }
+            }
+        }
+
+        function stopAutoSlide(carouselId) {
+            if (carouselId === 1) {
+                clearInterval(autoSlideInterval1);
+                autoSlideInterval1 = null;
+            } else {
+                clearInterval(autoSlideInterval2);
+                autoSlideInterval2 = null;
+            }
+        }
+
+        function pauseAndResumeAutoSlide(carouselId) {
+            stopAutoSlide(carouselId);
+            setTimeout(() => startAutoSlide(carouselId), PAUSE_DURATION);
+        }
+
+        // Initialize
+        showSlide(1, 0);
+        showSlide(2, 0);
+        startAutoSlide(1);
+        startAutoSlide(2);
+
+        // Add event listeners to pause auto-slide on hover
+        document.getElementById('carouselInner1').addEventListener('mouseenter', () => stopAutoSlide(1));
+        document.getElementById('carouselInner1').addEventListener('mouseleave', () => startAutoSlide(1));
+        document.getElementById('carouselInner2').addEventListener('mouseenter', () => stopAutoSlide(2));
+        document.getElementById('carouselInner2').addEventListener('mouseleave', () => startAutoSlide(2));
+    </script>
+
+</body>
+
+</html>
