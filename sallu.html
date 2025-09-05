@@ -555,19 +555,83 @@
     <!-- Footer -->
     <footer>&copy; 2025 A&M Fashion. All rights reserved.</footer>
 
-    <!-- Carousel Script -->
+    <!-- JavaScript for Carousels -->
     <script>
-        let currentSlide1 = 0, currentSlide2 = 0;
-        function showSlide(id, i) {
-            const inner = document.getElementById(`carouselInner${id}`), items = inner.children;
-            if (i >= items.length) i = 0; if (i < 0) i = items.length - 1;
-            inner.style.transform = `translateX(-${i * 100}%)`; return i;
-        }
-        function nextSlide(id) { if (id === 1) currentSlide1 = showSlide(1, currentSlide1 + 1); else currentSlide2 = showSlide(2, currentSlide2 + 1); }
-        function prevSlide(id) { if (id === 1) currentSlide1 = showSlide(1, currentSlide1 - 1); else currentSlide2 = showSlide(2, currentSlide2 - 1); }
-        showSlide(1, 0); showSlide(2, 0);
-    </script>
+        let currentSlide1 = 0;
+        let currentSlide2 = 0;
+        let autoSlideInterval1 = null;
+        let autoSlideInterval2 = null;
+        const AUTO_SLIDE_INTERVAL = 3000; // 3 seconds
+        const PAUSE_DURATION = 5000; // 5 seconds pause after manual interaction
 
+        function showSlide(carouselId, index) {
+            const inner = document.getElementById(`carouselInner${carouselId}`);
+            const items = inner.children;
+            if (index >= items.length) index = 0;
+            if (index < 0) index = items.length - 1;
+            inner.style.transform = `translateX(-${index * 100}%)`;
+            return index;
+        }
+
+        function nextSlide(carouselId) {
+            if (carouselId === 1) {
+                currentSlide1 = showSlide(1, currentSlide1 + 1);
+                pauseAndResumeAutoSlide(1);
+            } else {
+                currentSlide2 = showSlide(2, currentSlide2 + 1);
+                pauseAndResumeAutoSlide(2);
+            }
+        }
+
+        function prevSlide(carouselId) {
+            if (carouselId === 1) {
+                currentSlide1 = showSlide(1, currentSlide1 - 1);
+                pauseAndResumeAutoSlide(1);
+            } else {
+                currentSlide2 = showSlide(2, currentSlide2 - 1);
+                pauseAndResumeAutoSlide(2);
+            }
+        }
+
+        function startAutoSlide(carouselId) {
+            if (carouselId === 1) {
+                if (!autoSlideInterval1) {
+                    autoSlideInterval1 = setInterval(() => nextSlide(1), AUTO_SLIDE_INTERVAL);
+                }
+            } else {
+                if (!autoSlideInterval2) {
+                    autoSlideInterval2 = setInterval(() => nextSlide(2), AUTO_SLIDE_INTERVAL);
+                }
+            }
+        }
+
+        function stopAutoSlide(carouselId) {
+            if (carouselId === 1) {
+                clearInterval(autoSlideInterval1);
+                autoSlideInterval1 = null;
+            } else {
+                clearInterval(autoSlideInterval2);
+                autoSlideInterval2 = null;
+            }
+        }
+
+        function pauseAndResumeAutoSlide(carouselId) {
+            stopAutoSlide(carouselId);
+            setTimeout(() => startAutoSlide(carouselId), PAUSE_DURATION);
+        }
+
+        // Initialize
+        showSlide(1, 0);
+        showSlide(2, 0);
+        startAutoSlide(1);
+        startAutoSlide(2);
+
+        // Add event listeners to pause auto-slide on hover
+        document.getElementById('carouselInner1').addEventListener('mouseenter', () => stopAutoSlide(1));
+        document.getElementById('carouselInner1').addEventListener('mouseleave', () => startAutoSlide(1));
+        document.getElementById('carouselInner2').addEventListener('mouseenter', () => stopAutoSlide(2));
+        document.getElementById('carouselInner2').addEventListener('mouseleave', () => startAutoSlide(2));
+    </script>
     <script>
         const topBtn = document.querySelector(".top");
 
@@ -587,5 +651,6 @@
     </script>
 
 </body>
+
 
 </html>
